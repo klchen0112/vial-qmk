@@ -75,7 +75,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #endif // !POINTING_DEVICE_ENABLE
 
 enum userspace_keycodes {
-  SELECT_WORD = SAFE_RANGE,
+  SELECT_WORD = CHARYBDIS_SAFE_RANGE + 1,
   STICKY_LAYER_TOGGLE,
 };
 #define STLT STICKY_LAYER_TOGGLE
@@ -262,16 +262,16 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void rgb_matrix_update_pwm_buffers(void);
 #endif
 
-#ifdef RGB_MATRIX_ENABLE
-void keyboard_post_init_user(void) {
-    // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
-    // set initial effect on keyboard start; ignore what's in EEPROM!
-//     rgb_matrix_mode_noeeprom(
-//       // RGB_MATRIX_TYPING_HEATMAP
-//       RGB_MATRIX_KEYREACTIVE_ENABLED
-//     );
-}
-#endif
+// #ifdef RGB_MATRIX_ENABLE
+// void keyboard_post_init_user(void) {
+//     // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
+//     // set initial effect on keyboard start; ignore what's in EEPROM!
+// //     rgb_matrix_mode_noeeprom(
+// //       // RGB_MATRIX_TYPING_HEATMAP
+// //       RGB_MATRIX_KEYREACTIVE_ENABLED
+// //     );
+// }
+// #endif
 
 void shutdown_user(void) {
 #ifdef RGBLIGHT_ENABLE
@@ -302,6 +302,15 @@ void shutdown_user(void) {
 #define CAPS_LOCK_COLOR     DIMMED(RGB_BLUE)
 #define CAPS_WORD_COLOR     DIMMED(RGB_SPRINGGREEN)
 
+#define MOD_MASK_LCTRL (MOD_BIT(KC_LEFT_CTRL))
+#define MOD_MASK_RCTRL (MOD_BIT(KC_RIGHT_CTRL))
+#define MOD_MASK_LSHIFT (MOD_BIT(KC_LEFT_SHIFT))
+#define MOD_MASK_RSHIFT (MOD_BIT(KC_RIGHT_SHIFT))
+#define MOD_MASK_LALT (MOD_BIT(KC_LEFT_ALT))
+#define MOD_MASK_RALT (MOD_BIT(KC_RIGHT_ALT))
+#define MOD_MASK_LGUI (MOD_BIT(KC_LEFT_GUI))
+#define MOD_MASK_RGUI (MOD_BIT(KC_RIGHT_GUI))
+
 // see ../../4x6.c
 /**
  * \brief LEDs index.
@@ -321,7 +330,7 @@ void shutdown_user(void) {
  *
  * Note: the LED config simulates 58 LEDs instead of the actual 56 to prevent
  * confusion when testing LEDs during assembly when handedness is not set
- * correctly.  Those fake LEDs are bound to the physical bottom-left corner.
+ * correctly.  Those fake LEDs are bound to the physical bottom-left corner.〕
  */
 static const uint8_t
     LEFT_INDEX_FINGER_HOME   = 16,  RIGHT_INDEX_FINGER_HOME   = 45,
@@ -338,40 +347,35 @@ void rgb_matrix_indicators_user(void) {
 
     uint8_t mods = get_mods();
 
-    if (mods & MOD_MASK_SHIFT) {
+    if (mods & MOD_MASK_LSHIFT) {
         rgb_matrix_set_color( LEFT_INDEX_FINGER_HOME, INDEX_FINGER_COLOR);
+    }
+    if (mods & MOD_MASK_RSHIFT) {
         rgb_matrix_set_color(RIGHT_INDEX_FINGER_HOME, INDEX_FINGER_COLOR);
     }
-    else {
-        rgb_matrix_set_color( LEFT_INDEX_FINGER_HOME, RGB_OFF);
-        rgb_matrix_set_color(RIGHT_INDEX_FINGER_HOME, RGB_OFF);
+
+    if (mods & MOD_MASK_LCTRL) {
+        rgb_matrix_set_color( LEFT_MIDDLE_FINGER_HOME, MIDDLE_FINGER_COLOR);
     }
 
-    if (mods & MOD_MASK_CTRL) {
-        rgb_matrix_set_color( LEFT_MIDDLE_FINGER_HOME, MIDDLE_FINGER_COLOR);
+    if (mods & MOD_MASK_RCTRL) {
         rgb_matrix_set_color(RIGHT_MIDDLE_FINGER_HOME, MIDDLE_FINGER_COLOR);
     }
-    else {
-        rgb_matrix_set_color( LEFT_MIDDLE_FINGER_HOME, RGB_OFF);
-        rgb_matrix_set_color(RIGHT_MIDDLE_FINGER_HOME, RGB_OFF);
+
+    if (mods & MOD_MASK_LALT) {
+        rgb_matrix_set_color( LEFT_RING_FINGER_HOME, RING_FINGER_COLOR);
     }
 
-    if (mods & MOD_MASK_ALT) {
-        rgb_matrix_set_color( LEFT_RING_FINGER_HOME, RING_FINGER_COLOR);
+    if (mods & MOD_MASK_RALT) {
         rgb_matrix_set_color(RIGHT_RING_FINGER_HOME, RING_FINGER_COLOR);
     }
-    else {
-        rgb_matrix_set_color( LEFT_RING_FINGER_HOME, RGB_OFF);
-        rgb_matrix_set_color(RIGHT_RING_FINGER_HOME, RGB_OFF);
+
+    if (mods & MOD_MASK_LGUI) {
+        rgb_matrix_set_color( LEFT_PINKY_FINGER_HOME, PINKY_FINGER_COLOR);
     }
 
-    if (mods & MOD_MASK_GUI) {
-        rgb_matrix_set_color( LEFT_PINKY_FINGER_HOME, PINKY_FINGER_COLOR);
+    if (mods & MOD_MASK_RGUI) {
         rgb_matrix_set_color(RIGHT_PINKY_FINGER_HOME, PINKY_FINGER_COLOR);
-    }
-    else {
-        rgb_matrix_set_color( LEFT_PINKY_FINGER_HOME, RGB_OFF);
-        rgb_matrix_set_color(RIGHT_PINKY_FINGER_HOME, RGB_OFF);
     }
 
     switch (get_highest_layer(layer_state|default_layer_state)) {
@@ -453,12 +457,12 @@ void rgb_matrix_indicators_user(void) {
             rgb_matrix_set_color(RIGHT_THUMB_CLUSTER_OUTER, EXTRA_LAYER_COLOR);
             break;
         default:
-            rgb_matrix_set_color( LEFT_THUMB_CLUSTER_HOME,  RGB_OFF);
-            rgb_matrix_set_color(RIGHT_THUMB_CLUSTER_HOME,  RGB_OFF);
-            rgb_matrix_set_color( LEFT_THUMB_CLUSTER_INNER, RGB_OFF);
-            rgb_matrix_set_color(RIGHT_THUMB_CLUSTER_INNER, RGB_OFF);
-            rgb_matrix_set_color( LEFT_THUMB_CLUSTER_OUTER, RGB_OFF);
-            rgb_matrix_set_color(RIGHT_THUMB_CLUSTER_OUTER, RGB_OFF);
+            // rgb_matrix_set_color( LEFT_THUMB_CLUSTER_HOME,  RGB_OFF);
+            // rgb_matrix_set_color(RIGHT_THUMB_CLUSTER_HOME,  RGB_OFF);
+            // rgb_matrix_set_color( LEFT_THUMB_CLUSTER_INNER, RGB_OFF);
+            // rgb_matrix_set_color(RIGHT_THUMB_CLUSTER_INNER, RGB_OFF);
+            // rgb_matrix_set_color( LEFT_THUMB_CLUSTER_OUTER, RGB_OFF);
+            // rgb_matrix_set_color(RIGHT_THUMB_CLUSTER_OUTER, RGB_OFF);
             break;
     }
 
@@ -469,10 +473,6 @@ void rgb_matrix_indicators_user(void) {
     else if (is_caps_word_on()) {
       rgb_matrix_set_color( LEFT_CAPS_LOCK, CAPS_WORD_COLOR);
       rgb_matrix_set_color(RIGHT_CAPS_LOCK, CAPS_WORD_COLOR);
-    }
-    else {
-      rgb_matrix_set_color( LEFT_CAPS_LOCK, RGB_OFF);
-      rgb_matrix_set_color(RIGHT_CAPS_LOCK, RGB_OFF);
     }
 }
 #endif // RGB_MATRIX_ENABLE

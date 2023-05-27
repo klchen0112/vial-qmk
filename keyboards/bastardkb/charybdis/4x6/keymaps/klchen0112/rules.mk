@@ -2,6 +2,8 @@ VIA_ENABLE=yes
 
 VIAL_ENABLE = yes
 
+VIALRGB_ENABLE = no
+
 MOUSEKEY_ENABLE = yes
 
 AUDIO_ENABLE = no          # Audio output
@@ -15,3 +17,9 @@ CAPS_WORD_ENABLE = yes
 
 # https://docs.qmk.fm/#/custom_quantum_functions?id=deferred-execution
 DEFERRED_EXEC_ENABLE = yes
+
+TAP_DANCE_ENABLE = no
+COMBO_ENABLE = no
+QMK_SETTINGS = no
+SPACE_CADET_ENABLE = no
+KEY_OVERRIDE_ENABLE = no

@@ -46,9 +46,26 @@
             "title": "Drag-scroll Toggle",
             "name": "Drag-scroll TG",
             "shortName": "DrgT"
+        },
+        {
+            "title": "Select Word",
+            "name": "Select Word",
+            "shortName": "Sword"
+        },
+        {
+            "title": "Sticky layer toggle",
+            "name": "Sticky layer toggle",
+            "shortName": "STL"
         }
     ],
     "layouts": {
+        "labels": [
+            [
+                "Trackball",
+                "Right",
+                "Left"
+            ]
+        ],
         "keymap": [
             [
                 {
@@ -229,25 +246,59 @@
                 {
                     "x": 4.75
                 },
-                "4,3",
+                "4,3\n\n\n0,0",
+                "4,4\n\n\n0,0",
                 "4,1",
                 {
-                    "x": 1.5
+                    "x": 0.5
                 },
                 "9,1",
-                "9,4",
-                "9,3"
+                "9,3\n\n\n0,0",
+                {
+                    "d": true
+                },
+                "\n\n\n0,0"
             ],
             [
                 {
                     "x": 5.75
                 },
-                "4,5",
+                "4,5\n\n\n0,0",
+                "4,2",
+                {
+                    "x": 0.5
+                },
+                "9,5\n\n\n0,0",
+                {
+                    "d": true
+                },
+                "\n\n\n0,0"
+            ],
+            [
+                {
+                    "y": 0.5,
+                    "x": 4.75,
+                    "d": true
+                },
+                "\n\n\n0,1",
+                "4,3\n\n\n0,1",
+                {
+                    "x": 2.5
+                },
+                "9,4\n\n\n0,1",
+                "9,3\n\n\n0,1"
+            ],
+            [
+                {
+                    "x": 5.75,
+                    "d": true
+                },
+                "\n\n\n0,1",
                 {
                     "x": 1.5
                 },
-                "9,2",
-                "9,5"
+                "9,2\n\n\n0,1",
+                "9,5\n\n\n0,1"
             ]
         ]
     }

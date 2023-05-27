@@ -42,6 +42,10 @@
 /* Disable unused features. */
 #define NO_ACTION_ONESHOT
 
+#define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_LED_STATE_ENABLE
+#define SPLIT_MODS_ENABLE
+
 #ifndef TAPPING_TERM
 /**
  * \brief Configure the global tapping term (default: 200ms).
@@ -54,6 +58,7 @@
 
 
 #endif // TAPPING_TERM
+
 #define IGNORE_MOD_TAP_INTERRUPT /* for rolling on mod-tap keys */
 
 /* Miryoku */
@@ -74,27 +79,28 @@
 #define CHARYBDIS_CONFIG_SYNC
 
 #ifdef POINTING_DEVICE_ENABLE
-#define CHARYBDIS_MINIMUM_DEFAULT_DPI 1200
-#define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 400
-#define CHARYBDIS_MINIMUM_SNIPING_DPI 200
-#define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 100
-// Enable pointer acceleration, which increases the speed by ~2x for large
-// displacement, while maintaining 1x speed for slow movements.
-// - `CHARYBDIS_POINTER_ACCELERATION_FACTOR`
+// #define CHARYBDIS_MINIMUM_DEFAULT_DPI 1200
+// #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 400
+// #define CHARYBDIS_MINIMUM_SNIPING_DPI 200
+// #define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 100
+// // Enable pointer acceleration, which increases the speed by ~2x for large
+// // displacement, while maintaining 1x speed for slow movements.
+// // - `CHARYBDIS_POINTER_ACCELERATION_FACTOR`
 #define CHARYBDIS_POINTER_ACCELERATION_ENABLE
 
-// Automatically enable the pointer layer when moving the trackball.  See also:
-// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
-// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
+// // Automatically enable the pointer layer when moving the trackball.  See also:
+// // - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
+// // - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
 #define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-#undef ROTATIONAL_TRANSFORM_ANGLE
-#define ROTATIONAL_TRANSFORM_ANGLE 0
+// #undef ROTATIONAL_TRANSFORM_ANGLE
+// #define ROTATIONAL_TRANSFORM_ANGLE 0
 
-#undef POINTING_DEVICE_LEFT
-#define POINTING_DEVICE_RIGHT
+// // Double trackball build.
+// #undef POINTING_DEVICE_RIGHT
+// #define POINTING_DEVICE_LEFT
 
-#define POINTING_DEVICE_INVERT_Y
-#undef POINTING_DEVICE_INVERT_X
+// #define POINTING_DEVICE_INVERT_Y
+// #undef POINTING_DEVICE_INVERT_X
 #endif // POINTING_DEVICE_ENABLE
 
 
