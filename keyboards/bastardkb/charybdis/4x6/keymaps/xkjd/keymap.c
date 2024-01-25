@@ -48,15 +48,15 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif     // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-#define LG_T LGUI_T(KC_T)
-#define LA_H LALT_T(KC_H)
-#define LC_E LCTL_T(KC_E)
-#define LS_D LSFT_T(KC_D)
+#define LG_L LGUI_T(KC_L)
+#define LA_K LALT_T(KC_K)
+#define LC_F LCTL_T(KC_F)
+#define LS_Q LSFT_T(KC_Q)
 
-#define RG_Y RGUI_T(KC_Y)
-#define RA_F RALT_T(KC_F)
-#define RC_N RCTL_T(KC_N)
-#define RS_B RSFT_T(KC_B)
+#define RG_X RGUI_T(KC_X)
+#define RA_D RALT_T(KC_D)
+#define RC_J RCTL_T(KC_J)
+#define RS_E RSFT_T(KC_E)
 
 #define LT_TAB LT(LAYER_NUMBER, KC_TAB)
 #define LT_SPC LT(LAYER_FUNCTION, KC_SPC)
@@ -83,7 +83,7 @@ enum userspace_keycodes {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [LAYER_BASE] = LAYOUT_charybdis_4x6(
+  [LAYER_BASE] = LAYOUT(
   // ╭───────────────────────────────────────────────────────────╮ ╭────────────────────────────────────────────────────────────╮
           KC_LBRC,    KC_1,    KC_2,    KC_3,    KC_4,     KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC,
   // ├───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────┤
@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-  [LAYER_NUMBER] = LAYOUT_charybdis_4x6(
+  [LAYER_NUMBER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,     KC_TILD, KC_CIRC, KC_HASH, KC_DLR,   KC_AT, KC_EXLM,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
-  [LAYER_FUNCTION] = LAYOUT_charybdis_4x6(
+  [LAYER_FUNCTION] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,     KC_MSEL, KC_MPLY, KC_MNXT, KC_DLR, KC_MSTP, KC_EJCT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
- [LAYER_CURSOR] = LAYOUT_charybdis_4x6(
+ [LAYER_CURSOR] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   ),
 
- [LAYER_POINTER] = LAYOUT_charybdis_4x6(
+ [LAYER_POINTER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        XXXXXXX, DPI_RMOD, DPI_MOD, S_D_RMOD, S_D_MOD, XXXXXXX,    EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -161,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
-  [LAYER_SYMBOL] = LAYOUT_charybdis_4x6(
+  [LAYER_SYMBOL] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        KC_TILD, KC_COMM, KC_LPRN, KC_RPRN, KC_SCLN, KC_QUES,    EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -178,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-  [LAYER_SYSTEM] = LAYOUT_charybdis_4x6(
+  [LAYER_SYSTEM] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        KC_PWR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -193,7 +193,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
-  [LAYER_QWERTY] = LAYOUT_charybdis_4x6(
+  [LAYER_QWERTY] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_GRAVE,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -297,7 +297,7 @@ void rgb_matrix_update_pwm_buffers(void);
 // }
 // #endif
 
-void shutdown_user(void) {
+bool shutdown_kb(bool jump_to_bootloader)  {
 #ifdef RGBLIGHT_ENABLE
     rgblight_enable_noeeprom();
     rgblight_mode_noeeprom(1);
@@ -367,7 +367,7 @@ static const uint8_t
     LEFT_CAPS_LOCK           = 20,  RIGHT_CAPS_LOCK           = 49;
 
 
-void rgb_matrix_indicators_user(void) {
+bool rgb_matrix_indicators_user(void) {
 
     uint8_t mods = get_mods();
 
