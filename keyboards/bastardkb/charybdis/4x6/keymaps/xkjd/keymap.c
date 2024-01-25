@@ -502,5 +502,6 @@ bool rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color( LEFT_CAPS_LOCK, CAPS_WORD_COLOR);
       rgb_matrix_set_color(RIGHT_CAPS_LOCK, CAPS_WORD_COLOR);
     }
+    return true;
 }
 #endif // RGB_MATRIX_ENABLE
