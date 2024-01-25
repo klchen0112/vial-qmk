@@ -76,7 +76,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #endif // !POINTING_DEVICE_ENABLE
 
 enum userspace_keycodes {
-  SELECT_WORD = CHARYBDIS_SAFE_RANGE + 1,
+  SELECT_WORD = SAFE_RANGE + 1,
   STICKY_LAYER_TOGGLE,
 };
 #define STLT STICKY_LAYER_TOGGLE
@@ -298,15 +298,19 @@ void rgb_matrix_update_pwm_buffers(void);
 // #endif
 
 bool shutdown_kb(bool jump_to_bootloader)  {
+    if (!shutdown_user(jump_to_bootloader)) {
+        return false;
+    }
 #ifdef RGBLIGHT_ENABLE
     rgblight_enable_noeeprom();
-    rgblight_mode_noeeprom(1);
-    rgblight_setrgb_red(RGB_RED);
+    rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+    rgblight_setrgb(RGB_RED);
 #endif // RGBLIGHT_ENABLE
 #ifdef RGB_MATRIX_ENABLE
     rgb_matrix_set_color_all(RGB_RED);
     rgb_matrix_update_pwm_buffers();
 #endif // RGB_MATRIX_ENABLE
+    return true;
 }
 
 #ifdef RGB_MATRIX_ENABLE
