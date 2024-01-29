@@ -11,7 +11,7 @@ AUDIO_ENABLE = no          # Audio output
 SPLIT_KEYBOARD = yes       # Split common
 
 SRC += features/select_word.c
-SRC += features/custom_shift_keys.c
+# SRC += features/custom_shift_keys.c
 
 # https://docs.qmk.fm/#/feature_caps_word?id=caps-word
 CAPS_WORD_ENABLE = yes

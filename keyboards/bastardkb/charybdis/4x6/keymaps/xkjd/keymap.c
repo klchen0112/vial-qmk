@@ -16,7 +16,7 @@
  */
 #include QMK_KEYBOARD_H
 #include "features/select_word.h"
-#include "features/custom_shift_keys.h"
+// #include "features/custom_shift_keys.h"
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
@@ -48,15 +48,15 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif     // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-#define LG_L LGUI_T(KC_L)
-#define LA_K LALT_T(KC_K)
-#define LC_F LCTL_T(KC_F)
-#define LS_Q LSFT_T(KC_Q)
+#define LG_A LGUI_T(KC_A)
+#define LA_S LALT_T(KC_S)
+#define LC_D LCTL_T(KC_D)
+#define LS_F LSFT_T(KC_F)
 
-#define RG_X RGUI_T(KC_X)
-#define RA_D RALT_T(KC_D)
-#define RC_J RCTL_T(KC_J)
-#define RS_E RSFT_T(KC_E)
+#define RG_SCLN RGUI_T(KC_SCLN)
+#define RA_L RALT_T(KC_D)
+#define RC_K RCTL_T(KC_J)
+#define RS_J RSFT_T(KC_E)
 
 #define LT_TAB LT(LAYER_NUMBER, KC_TAB)
 #define LT_SPC LT(LAYER_FUNCTION, KC_SPC)
@@ -81,17 +81,19 @@ enum userspace_keycodes {
 };
 #define STLT STICKY_LAYER_TOGGLE
 
+
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT(
   // ╭───────────────────────────────────────────────────────────╮ ╭────────────────────────────────────────────────────────────╮
-          KC_LBRC,    KC_1,    KC_2,    KC_3,    KC_4,     KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC,
+          KC_GRAVE,    KC_1,    KC_2,    KC_3,    KC_4,     KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
   // ├───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────┤
-            KC_AT     ,    KC_P,    KC_H,    KC_B,    KC_Y, KC_QUOTE,           KC_DQUO,    KC_T,    KC_G,    KC_R,    KC_Z, KC_C,
+            KC_LBRC,    KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_RBRC,
   // ├───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────┤
-            KC_SLSH      ,    LG_L,    LA_K,    LC_F,    LS_Q,  KC_COMM,          KC_DOT,    RS_E,    RC_J,    RA_D,  RG_X,    KC_N,
+            KC_MINS,    LG_A,    LA_S,    LC_D,    LS_F,  KC_G,          KC_H,    RS_J,    RC_K,    RA_L,   RG_SC,    KC_QUOT,
   // ├───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────┤
-           KC_LSFT,    KC_S,    KC_V,    KC_O,    KC_A,   KC_MINS,       KC_QUES,    KC_M, KC_I,  KC_V, KC_W, KC_RSFT,
+           KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_BSLS,
   // ╰───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────╯
                                    LT_TAB, LT_SPC,   DF(LAYER_QWERTY),      LT_DEL,  LT_BSPC,
                                            LT_ESC,  KC_HASH,     LT_ENT
@@ -209,32 +211,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-const custom_shift_key_t custom_shift_keys[] = {
-	{ KC_1,    KC_PIPE }, /* 1| */
-	{ KC_2,    KC_EQL  }, /* 2= */
-	{ KC_3,    KC_TILD }, /* 3~ */
-	{ KC_4,    KC_PLUS }, /* 4+ */
-	{ KC_5,    KC_LT   }, /* 5< */
-	{ KC_6,    KC_GT   }, /* 6> */
-	{ KC_7,    KC_CIRC }, /* 7^ */
-	{ KC_8,    KC_AMPR }, /* 8& */
-	{ KC_9,    KC_PERC }, /* 9% */
-	{ KC_0,    KC_ASTR }, /* 0* */
-	{ KC_SLSH, KC_BSLS }, /* /\ */
-	{ KC_QUOT, KC_LPRN }, /* '( */
-	{ KC_DQUO, KC_RPRN }, /* ") */
-	{ KC_COMM, KC_SCLN }, /* ,; */
-	{ KC_DOT,  KC_COLN }, /* .: */
-	{ KC_QUES, KC_EXLM }, /* ?! */
-	{ KC_HASH, KC_DLR  }, /* #$ */
-	{ KC_AT,   KC_GRV  }, /* @` */
-};
+// const custom_shift_key_t custom_shift_keys[] = {
+// 	{ KC_1,    KC_PIPE }, /* 1| */
+// 	{ KC_2,    KC_EQL  }, /* 2= */
+// 	{ KC_3,    KC_TILD }, /* 3~ */
+// 	{ KC_4,    KC_PLUS }, /* 4+ */
+// 	{ KC_5,    KC_LT   }, /* 5< */
+// 	{ KC_6,    KC_GT   }, /* 6> */
+// 	{ KC_7,    KC_CIRC }, /* 7^ */
+// 	{ KC_8,    KC_AMPR }, /* 8& */
+// 	{ KC_9,    KC_PERC }, /* 9% */
+// 	{ KC_0,    KC_ASTR }, /* 0* */
+// 	{ KC_SLSH, KC_BSLS }, /* /\ */
+// 	{ KC_QUOT, KC_LPRN }, /* '( */
+// 	{ KC_DQUO, KC_RPRN }, /* ") */
+// 	{ KC_COMM, KC_SCLN }, /* ,; */
+// 	{ KC_DOT,  KC_COLN }, /* .: */
+// 	{ KC_QUES, KC_EXLM }, /* ?! */
+// 	{ KC_HASH, KC_DLR  }, /* #$ */
+// 	{ KC_AT,   KC_GRV  }, /* @` */
+// };
 
-uint8_t NUM_CUSTOM_SHIFT_KEYS =
-    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
+// uint8_t NUM_CUSTOM_SHIFT_KEYS =
+//     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-     if (!process_custom_shift_keys(keycode, record)) { return false; }
+    //  if (!process_custom_shift_keys(keycode, record)) { return false; }
     if (!process_select_word(keycode, record, SELECT_WORD)) { return false; }
     // handle sticky holding of Miryoku thumb cluster layer-taps as toggles
     if (keycode == STLT && record->event.pressed) {
