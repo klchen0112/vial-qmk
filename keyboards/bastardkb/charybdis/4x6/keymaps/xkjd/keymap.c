@@ -16,7 +16,7 @@
  */
 #include QMK_KEYBOARD_H
 #include "features/select_word.h"
-// #include "features/custom_shift_keys.h"
+#include "features/custom_shift_keys.h"
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
@@ -81,7 +81,7 @@ enum userspace_keycodes {
 };
 #define STLT STICKY_LAYER_TOGGLE
 
-
+#define MTCC MT(MOD_LCTL | MOD_LGUI, KC_CAPS)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────┤
         KC_GRAVE,   KC_B,   KC_W,   KC_E,   KC_R,   KC_QUOT,      KC_SCLN,  KC_L,   KC_D,   KC_W,   KC_V,     KC_Z,
   // ├────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────┤
-        KC_LCTRL,   LG_C,   LA_I,   LC_E,   LS_A,   KC_COMM,       KC_DOT,  RS_H,   RC_T,   RA_S,   RG_N,     KC_Q,
+            MTCC,   LG_C,   LA_I,   LC_E,   LS_A,   KC_COMM,       KC_DOT,  RS_H,   RC_T,   RA_S,   RG_N,     KC_Q,
   // ├────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────┤
          KC_LSFT,   KC_G,   KC_X,   KC_J,   KC_K,   KC_MINS,      KC_SLSH,  KC_R,   KC_M,   KC_F,   KC_P,  KC_RSFT,
   // ╰────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────╯
