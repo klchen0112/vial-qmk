@@ -59,7 +59,6 @@
 
 #endif // TAPPING_TERM
 
-#define IGNORE_MOD_TAP_INTERRUPT /* for rolling on mod-tap keys */
 
 /* Miryoku */
 #define BILATERAL_COMBINATIONS

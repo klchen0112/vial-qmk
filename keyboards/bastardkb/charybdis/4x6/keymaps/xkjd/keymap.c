@@ -54,9 +54,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LS_F LSFT_T(KC_F)
 
 #define RG_SCLN RGUI_T(KC_SCLN)
-#define RA_L RALT_T(KC_D)
-#define RC_K RCTL_T(KC_J)
-#define RS_J RSFT_T(KC_E)
+#define RA_L RALT_T(KC_L)
+#define RC_K RCTL_T(KC_K)
+#define RS_J RSFT_T(KC_J)
 
 #define LT_TAB LT(LAYER_NUMBER, KC_TAB)
 #define LT_SPC LT(LAYER_FUNCTION, KC_SPC)
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────┤
             KC_LBRC,    KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_RBRC,
   // ├───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────┤
-            KC_MINS,    LG_A,    LA_S,    LC_D,    LS_F,  KC_G,          KC_H,    RS_J,    RC_K,    RA_L,   RG_SC,    KC_QUOT,
+            KC_MINS,    LG_A,    LA_S,    LC_D,    LS_F,  KC_G,          KC_H,    RS_J,    RC_K,    RA_L,   RG_SCLN,    KC_QUOT,
   // ├───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────┤
            KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_BSLS,
   // ╰───────────────────────────────────────────────────────────┤ ├────────────────────────────────────────────────────────────╯
@@ -299,21 +299,6 @@ void rgb_matrix_update_pwm_buffers(void);
 // }
 // #endif
 
-bool shutdown_kb(bool jump_to_bootloader)  {
-    if (!shutdown_user(jump_to_bootloader)) {
-        return false;
-    }
-#ifdef RGBLIGHT_ENABLE
-    rgblight_enable_noeeprom();
-    rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-    rgblight_setrgb(RGB_RED);
-#endif // RGBLIGHT_ENABLE
-#ifdef RGB_MATRIX_ENABLE
-    rgb_matrix_set_color_all(RGB_RED);
-    rgb_matrix_update_pwm_buffers();
-#endif // RGB_MATRIX_ENABLE
-    return true;
-}
 
 #ifdef RGB_MATRIX_ENABLE
 
