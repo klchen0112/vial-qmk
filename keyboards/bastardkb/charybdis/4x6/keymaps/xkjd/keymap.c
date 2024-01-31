@@ -81,7 +81,7 @@ enum userspace_keycodes {
 };
 #define STLT STICKY_LAYER_TOGGLE
 
-#define MTCC MT(MOD_LCTL | MOD_LGUI, KC_CAPS)
+#define MTCC MT(MOD_LCTL , KC_CAPS)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
