@@ -16,7 +16,7 @@
  */
 #include QMK_KEYBOARD_H
 #include "features/select_word.h"
-#include "features/custom_shift_keys.h"
+// #include "features/custom_shift_keys.h"
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
@@ -211,32 +211,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-const custom_shift_key_t custom_shift_keys[] = {
-	{ KC_1,    KC_PIPE }, /* 1| */
-	{ KC_2,    KC_EQL  }, /* 2= */
-	{ KC_3,    KC_TILD }, /* 3~ */
-	{ KC_4,    KC_PLUS }, /* 4+ */
-	{ KC_5,    KC_LT   }, /* 5< */
-	{ KC_6,    KC_GT   }, /* 6> */
-	{ KC_7,    KC_CIRC }, /* 7^ */
-	{ KC_8,    KC_AMPR }, /* 8& */
-	{ KC_9,    KC_PERC }, /* 9% */
-	{ KC_0,    KC_ASTR }, /* 0* */
-	{ KC_SLSH, KC_BSLS }, /* /\ */
-	{ KC_QUOT, KC_LPRN }, /* '( */
-	{ KC_DQUO, KC_RPRN }, /* ") */
-	{ KC_COMM, KC_SCLN }, /* ,; */
-	{ KC_DOT,  KC_COLN }, /* .: */
-	{ KC_QUES, KC_EXLM }, /* ?! */
-	{ KC_HASH, KC_DLR  }, /* #$ */
-	{ KC_AT,   KC_GRV  }, /* @` */
-};
+// const custom_shift_key_t custom_shift_keys[] = {
+// 	{ KC_1,    KC_PIPE }, /* 1| */
+// 	{ KC_2,    KC_EQL  }, /* 2= */
+// 	{ KC_3,    KC_TILD }, /* 3~ */
+// 	{ KC_4,    KC_PLUS }, /* 4+ */
+// 	{ KC_5,    KC_LT   }, /* 5< */
+// 	{ KC_6,    KC_GT   }, /* 6> */
+// 	{ KC_7,    KC_CIRC }, /* 7^ */
+// 	{ KC_8,    KC_AMPR }, /* 8& */
+// 	{ KC_9,    KC_PERC }, /* 9% */
+// 	{ KC_0,    KC_ASTR }, /* 0* */
+// 	{ KC_SLSH, KC_BSLS }, /* /\ */
+// 	{ KC_QUOT, KC_LPRN }, /* '( */
+// 	{ KC_DQUO, KC_RPRN }, /* ") */
+// 	{ KC_COMM, KC_SCLN }, /* ,; */
+// 	{ KC_DOT,  KC_COLN }, /* .: */
+// 	{ KC_QUES, KC_EXLM }, /* ?! */
+// 	{ KC_HASH, KC_DLR  }, /* #$ */
+// 	{ KC_AT,   KC_GRV  }, /* @` */
+// };
 
-uint8_t NUM_CUSTOM_SHIFT_KEYS =
-    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
+// uint8_t NUM_CUSTOM_SHIFT_KEYS =
+//     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!process_custom_shift_keys(keycode, record)) { return false; }
+    // if (!process_custom_shift_keys(keycode, record)) { return false; }
     if (!process_select_word(keycode, record, SELECT_WORD)) { return false; }
     // handle sticky holding of Miryoku thumb cluster layer-taps as toggles
     if (keycode == STLT && record->event.pressed) {
