@@ -17,10 +17,28 @@
 #include QMK_KEYBOARD_H
 #include "features/select_word.h"
 // #include "features/custom_shift_keys.h"
+#include "features/sm_td.h"
+
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
 #endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+
+
+smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
+    switch (keycode) {
+        SMTD_MT(KC_C, KC_LEFT_GUI)
+        SMTD_MT(KC_I, KC_LEFT_ALT)
+        SMTD_MT(KC_E, KC_LSFT)
+        SMTD_MT(KC_A, KC_LEFT_CTRL)
+        SMTD_MT(KC_N, KC_RIGHT_GUI)
+        SMTD_MT(KC_S, KC_RIGHT_ALT)
+        SMTD_MT(KC_T, KC_RSFT)
+        SMTD_MT(KC_H, KC_RIGHT_GUI)
+    }
+
+    return SMTD_RESOLUTION_UNHANDLED;
+}
 
 enum charybdis_keymap_layers {
     DEF = 0,
@@ -48,15 +66,15 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif     // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-#define LG_C LGUI_T(KC_C)
-#define LA_I LALT_T(KC_I)
-#define LC_E LCTL_T(KC_E)
-#define LS_A LSFT_T(KC_A)
+#define L_C LGUI_T(KC_C)
+#define L_I LALT_T(KC_I)
+#define L_E LCTL_T(KC_E)
+#define L_A LSFT_T(KC_A)
 
-#define RG_N RGUI_T(KC_N)
-#define RA_S RALT_T(KC_S)
-#define RC_T RCTL_T(KC_T)
-#define RS_H RSFT_T(KC_H)
+#define R_N RGUI_T(KC_N)
+#define R_S RALT_T(KC_S)
+#define R_T RCTL_T(KC_T)
+#define R_H RSFT_T(KC_H)
 
 
 #ifndef POINTING_DEVICE_ENABLE
@@ -80,16 +98,16 @@ enum userspace_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [DEF] = LAYOUT(
   // ╭───────────────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────────╮
-        LT(SYS, KC_TAB),    KC_1,   KC_2,   KC_3,   KC_4,      KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   LT(SYS,KC_EQL),
+        LT(SYS, KC_GRAVE),  KC_1,   KC_2,   KC_3,   KC_4,      KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,  LT(SYS,KC_RSFT),
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
-                KC_LBRC,    KC_B,   KC_Y,   KC_O,   KC_U,   KC_QUOT,     KC_SCLN,   KC_L,   KC_D,   KC_W,   KC_V,          KC_RBRC,
+        KC_LBRC,            KC_B,   KC_Y,   KC_O,   KC_U,   KC_QUOT,     KC_SCLN,   KC_L,   KC_D,   KC_W,   KC_V,          KC_RBRC,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
-          KC_COMM,    LG_C,   LA_I,   LC_E,   LS_A,      KC_Z,        KC_Q,   RS_H,   RC_T,   RA_S,   RG_N,           KC_DOT,
+        KC_COMM,             L_C,    L_I,    L_E,    L_A,      KC_Z,        KC_Q,   R_H,     R_T,    R_S,    R_N,           KC_DOT,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
-                KC_LSFT,    KC_G,   KC_X,   KC_J,   KC_K,   KC_MINS,     KC_SLSH,   KC_R,   KC_M,   KC_F,   KC_P,          KC_RSFT,
+        KC_SLSH,            KC_G,   KC_X,    KC_J,  KC_K,   KC_MINS,     KC_SLSH,   KC_R,   KC_M,   KC_F,    KC_P,         KC_BSLS,
   // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────╯
-                          KC_TAB, LT(NUM,KC_LCTL),  LT(NAV,KC_SLSH),     LT(FN,KC_ENTER),  LT(MOU,KC_BSPC),
-                                  LT(QWE,KC_ESC),  LT(FN,KC_BSLS),     LT(SYM,KC_SPC)
+                          KC_TAB, LT(NUM,KC_LCTL),  LT(NAV,KC_BTN1),     LT(FN,KC_ENTER),  LT(MOU,KC_BSPC),
+                                   LT(QWE,KC_ESC),   LT(FN,KC_BTN2),     LT(SYM,KC_SPC)
   //                            ╰────────────────────────────────────╯ ╰──────────────────────────────╯
   ),
 
