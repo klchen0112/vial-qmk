@@ -68,13 +68,13 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define L_C LGUI_T(KC_C)
 #define L_I LALT_T(KC_I)
-#define L_E LCTL_T(KC_E)
-#define L_A LSFT_T(KC_A)
+#define L_E LSFT_T(KC_E)
+#define L_A LCTL_T(KC_A)
 
 #define R_N RGUI_T(KC_N)
 #define R_S RALT_T(KC_S)
-#define R_T RCTL_T(KC_T)
-#define R_H RSFT_T(KC_H)
+#define R_T RSFT_T(KC_T)
+#define R_H RCTL_T(KC_H)
 
 
 #ifndef POINTING_DEVICE_ENABLE
