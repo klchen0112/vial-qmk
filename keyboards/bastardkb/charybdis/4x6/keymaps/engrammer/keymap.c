@@ -29,12 +29,12 @@ smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap
     switch (keycode) {
         SMTD_MT(KC_C, KC_LEFT_GUI)
         SMTD_MT(KC_I, KC_LEFT_ALT)
-        SMTD_MT(KC_E, KC_LSFT)
-        SMTD_MT(KC_A, KC_LEFT_CTRL)
+        SMTD_MT(KC_E, KC_LEFT_CTRL)
+        SMTD_MT(KC_A, KC_LSFT)
         SMTD_MT(KC_N, KC_RIGHT_GUI)
         SMTD_MT(KC_S, KC_RIGHT_ALT)
-        SMTD_MT(KC_T, KC_RSFT)
-        SMTD_MT(KC_H, KC_RIGHT_GUI)
+        SMTD_MT(KC_T, KC_RIGHT_CTRL)
+        SMTD_MT(KC_H, KC_RSFT)
     }
 
     return SMTD_RESOLUTION_UNHANDLED;
@@ -68,13 +68,13 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define L_C LGUI_T(KC_C)
 #define L_I LALT_T(KC_I)
-#define L_E LSFT_T(KC_E)
-#define L_A LCTL_T(KC_A)
+#define L_E LCTL_T(KC_E)
+#define L_A LSFT_T(KC_A)
 
 #define R_N RGUI_T(KC_N)
 #define R_S RALT_T(KC_S)
-#define R_T RSFT_T(KC_T)
-#define R_H RCTL_T(KC_H)
+#define R_T RCTL_T(KC_T)
+#define R_H RSFT_T(KC_H)
 
 
 #ifndef POINTING_DEVICE_ENABLE
@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
         KC_COMM,             L_C,    L_I,    L_E,    L_A,      KC_Z,        KC_Q,   R_H,     R_T,    R_S,    R_N,           KC_DOT,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
-        KC_SLSH,            KC_G,   KC_X,    KC_J,  KC_K,   KC_MINS,     KC_SLSH,   KC_R,   KC_M,   KC_F,    KC_P,         KC_BSLS,
+        KC_SLSH,            KC_G,   KC_X,    KC_J,  KC_K,   KC_MINS,     KC_EQL,   KC_R,   KC_M,   KC_F,    KC_P,         KC_BSLS,
   // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────╯
                           KC_TAB, LT(NUM,KC_LCTL),  LT(NAV,KC_BTN1),     LT(FN,KC_ENTER),  LT(MOU,KC_BSPC),
                                    LT(QWE,KC_ESC),   LT(FN,KC_BTN2),     LT(SYM,KC_SPC)
