@@ -40,16 +40,8 @@ smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap
 #define R_T RCTL_T(KC_T)
 #define R_H RSFT_T(KC_H)
 
-
-// bottom mods
-#define SYM_SPC LT(SYM, KC_SPC)
-#define NUM_TAB LT(NUM, KC_TAB)
-#define SYS_ESC LT(SYS, KC_ESC)
-#define SYM_ENT LT(SYM, KC_ENT)
-#define SYS_BSPC LT(SYS, KC_BSPC)
-#define RALT_DEL LALT_T(KC_DEL)
-#define SYS_WIN LT(SYS, KC_LGUI)
-
+#define SYS_BSPC LT(SYS,KC_BSPC)
+#define SYS_ESC LT(SYS,KC_ESC)
 // 阻击模式相关定义
 #define SNP_MIN_CPI 50
 #define SNP_MAX_CPI 500
@@ -70,6 +62,7 @@ static bool     sniper_mode = false;
 static uint16_t scroll_cpi  = SCROLL_DEFAULT_CPI;
 static bool     scroll_mode = false;
 
+
 enum custom_keycodes {
     DPI_UP = QK_KB_0, // SAFE_RANGE,
     DPI_DOWN,
@@ -82,8 +75,10 @@ enum custom_keycodes {
     DRG_T,  // 切换滚动模式
     DRG_UP, // 增加滚动模式DPI
     DRG_DN,  // 减少滚动模式DPI
-    SELWORD // select word
+    SELWORD, // select word
+    STICKY_LAYER_TOGGLE // STLT
 };
+#define STLT STICKY_LAYER_TOGGLE
 uint16_t SELECT_WORD_KEYCODE = SELWORD;
 // 声明一个全局变量来存储当前的CPI值
 static uint16_t current_cpi = CPI_DEFAULT;
@@ -112,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
         KC_SLSH,            KC_G,   KC_X,    KC_J,  KC_K,   KC_MINS,      KC_EQL,   KC_R,   KC_M,   KC_F,    KC_P,         KC_BSLS,
   // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────╯
-                  KC_TAB, LT(NUM,KC_LCTL),   LT(FN,KC_ESC), KC_MUTE,     KC_MUTE, LT(SYM,KC_SPC), LT(FN,KC_ENTER),  LT(MOU,KC_BSPC),
+                  KC_TAB, LT(NUM,KC_LCTL),   LT(FN,KC_ESC), DF(GAME),     KC_MUTE, LT(SYM,KC_SPC), LT(FN,KC_ENTER),  LT(MOU,KC_BSPC),
   //                            ╰────────────────────────────────────╯ ╰──────────────────────────────╯
                MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
                             SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
@@ -125,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
          KC_NUM, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_PCMM,     KC_PPLS,  KC_P4,   KC_P5,  KC_P6, KC_PMNS, KC_MUTE,
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-         TG(NUM), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_PAST,   KC_P1,   KC_P2,  KC_P3, KC_PSLS, KC_VOLD,
+           STLT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_PAST,   KC_P1,   KC_P2,  KC_P3, KC_PSLS, KC_VOLD,
     // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                         XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    KC_MUTE, KC_RPRN , KC_LPRN, KC_P0,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
@@ -140,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_SCRL, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_MUTE,   KC_F4,   KC_F5,  KC_F6,  KC_F11,  KC_F14,
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-         TG(FN), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,   KC_VOLD,   KC_F1,   KC_F2,  KC_F3,  KC_F12,  KC_F15,
+           STLT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,   KC_VOLD,   KC_F1,   KC_F2,  KC_F3,  KC_F12,  KC_F15,
     // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                             XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , KC_BRID, KC_BRIU,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
@@ -155,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_CAPS, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_COPY, KC_LEFT, KC_DOWN, KC_RIGHT, SELWORD, KC_PSCR,
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        TG(NAV), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_PSTE, KC_HOME, KC_PGUP,  KC_PGDN,  KC_END, XXXXXXX,
+           STLT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_PSTE, KC_HOME, KC_PGUP,  KC_PGDN,  KC_END, XXXXXXX,
     // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                             XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , XXXXXXX, XXXXXXX,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
@@ -170,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_HASH, KC_CIRC, KC_EQL, KC_UNDS, KC_DLR,  KC_ASTR,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_EXLM, KC_LT, KC_PIPE, KC_MINS, KC_GT,   KC_SLSH,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(SYM),
+       KC_EXLM, KC_LT, KC_PIPE, KC_MINS, KC_GT,   KC_SLSH,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   STLT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                     KC_BSLS, KC_COLN,  KC_PERC,   KC_AMPR,     KC_PLUS, XXXXXXX,  KC_LBRC ,KC_RBRC,
   //                            ╰───────────────────────────╯ ╰──────────────────╯
@@ -185,7 +180,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, KC_ACL0, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-         DRG_T, KC_ACL1, KC_WH_D, XXXXXXX, KC_WH_U, SNP_T,        DB_TOGG,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(MOU),
+         DRG_T, KC_ACL1, KC_WH_D, XXXXXXX, KC_WH_U, SNP_T,        DB_TOGG,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, STLT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                             KC_BTN1, KC_BTN2,  KC_BTN3,   XXXXXXX,     XXXXXXX, XXXXXXX,  XXXXXXX ,XXXXXXX,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
@@ -194,13 +189,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [SYS] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,  EE_CLR,     EE_CLR, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, QK_BOOT,  EE_CLR,  XXXXXXX,  CK_UP, CK_DOWN,     UG_VALU, UG_VALD, XXXXXXX,  EE_CLR, QK_BOOT, XXXXXXX,
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        RGB_M_X, RGB_M_SW, RGB_M_SN, XXXXXXX, RGB_M_T, RGB_M_R,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, HF_PREV, HF_NEXT,  XXXXXXX, AU_NEXT, AU_PREV,     UG_SATU, UG_SATD, UG_HUEU, XXXXXXX, XXXXXXX, XXXXXXX,
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        RGB_M_K, RGB_VAD, RGB_RMOD, RGB_MOD, RGB_VAI, RGB_M_G,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
+        XXXXXXX, HF_CONU, HF_COND,  XXXXXXX, _______, MU_TOGG,   UG_HUEU,  UG_HUED, UG_SPDU, UG_SPDD, BL_STEP, XXXXXXX,
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        RGB_M_P, RGB_SAD, RGB_HUD, RGB_HUI, RGB_SAI, RGB_M_B,    DB_TOGG,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(SYS),
+           STLT, HF_TOGG, HF_FDBK,  XXXXXXX, CK_TOGG, AU_TOGG,   UG_NEXT,  UG_PREV, UG_TOGG, BL_TOGG, BL_BRTG,  STLT,
     // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
             XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , XXXXXXX, XXXXXXX,
             //                            ╰───────────────────────────╯ ╰──────────────────╯
@@ -217,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
          KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                            XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                            XXXXXXX, XXXXXXX, XXXXXXX,DF(DEF),   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
             //                            ╰───────────────────────────╯ ╰──────────────────╯
     MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
         SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
@@ -230,7 +225,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     // clang-format off
     [DEF] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [NUM] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [FN]  = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+     [FN] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [NAV] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [SYM] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [MOU] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
@@ -290,6 +285,9 @@ void adjust_cpi(bool increase) {
 // Function to handle key events and enable/disable drag scrolling
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_select_word(keycode, record)) { return false; }
+    if (keycode == STLT && record->event.pressed) {
+        default_layer_set(default_layer_state ? 0 : (1 << get_highest_layer(layer_state)));
+    }
     switch (keycode) {
         case DPI_UP:
             if (record->event.pressed) {
