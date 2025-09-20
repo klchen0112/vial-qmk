@@ -12,6 +12,7 @@
 #include "drivers/haptic/drv2605l.h"
 
 #include "sm_td.h"
+#include "select_word.h"
 
 
 smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
@@ -80,9 +81,10 @@ enum custom_keycodes {
     DRG,    // 长按进入滚动模式
     DRG_T,  // 切换滚动模式
     DRG_UP, // 增加滚动模式DPI
-    DRG_DN  // 减少滚动模式DPI
+    DRG_DN,  // 减少滚动模式DPI
+    SELWORD // select word
 };
-
+uint16_t SELECT_WORD_KEYCODE = SELWORD;
 // 声明一个全局变量来存储当前的CPI值
 static uint16_t current_cpi = CPI_DEFAULT;
 
@@ -130,7 +132,96 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
                             SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
     ),
-
+    [FN] = LAYOUT(
+    // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_MSEL, KC_MPLY, KC_MNXT, KC_DLR, KC_MSTP, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_VOLU,   KC_F7,   KC_F8,  KC_F9,  KC_F10,  KC_F13,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        KC_SCRL, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_MUTE,   KC_F4,   KC_F5,  KC_F6,  KC_F11,  KC_F14,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+         TG(FN), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,   KC_VOLD,   KC_F1,   KC_F2,  KC_F3,  KC_F12,  KC_F15,
+    // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+                            XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , KC_BRID, KC_BRIU,
+    //                            ╰───────────────────────────╯ ╰──────────────────╯
+      MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
+                            SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+    ),
+    [NAV] = LAYOUT(
+    // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_CUT,  KC_UNDO,  KC_UP, KC_AGIN,  KC_INS, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        KC_CAPS, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_COPY, KC_LEFT, KC_DOWN, KC_RIGHT, SELWORD, KC_PSCR,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        TG(NAV), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_PSTE, KC_HOME, KC_PGUP,  KC_PGDN,  KC_END, XXXXXXX,
+    // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+                            XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , XXXXXXX, XXXXXXX,
+    //                            ╰───────────────────────────╯ ╰──────────────────╯
+      MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
+                            SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+    ),
+    [SYM] = LAYOUT(
+  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+       KC_TILD, KC_COMM, KC_LPRN, KC_RPRN, KC_SCLN, KC_QUES,    EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+         KC_AT, KC_LCBR, KC_DQUO, KC_QUOT, KC_RCBR,  KC_DOT,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+       KC_HASH, KC_CIRC, KC_EQL, KC_UNDS, KC_DLR,  KC_ASTR,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+       KC_EXLM, KC_LT, KC_PIPE, KC_MINS, KC_GT,   KC_SLSH,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(SYM),
+  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+                    KC_BSLS, KC_COLN,  KC_PERC,   KC_AMPR,     KC_PLUS, XXXXXXX,  KC_LBRC ,KC_RBRC,
+  //                            ╰───────────────────────────╯ ╰──────────────────╯
+    MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
+        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+    ),
+     [MOU] = LAYOUT(
+  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+       XXXXXXX, DPI_RMOD, DPI_MOD, S_D_RMOD, S_D_MOD, XXXXXXX,    EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+       XXXXXXX, KC_ACL2, KC_WH_L, KC_MS_U, KC_WH_R, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+       DRGSCRL, KC_ACL0, KC_MS_L, KC_MS_D, KC_MS_R, SNIPING,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+       DRG_TOG, KC_ACL1, KC_WH_D, XXXXXXX, KC_WH_U, SNP_TOG,    DB_TOGG,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(MOU),
+  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+                            KC_BTN1, KC_BTN2,  KC_BTN3,   XXXXXXX,     XXXXXXX, XXXXXXX,  XXXXXXX ,XXXXXXX,
+    //                            ╰───────────────────────────╯ ╰──────────────────╯
+    MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
+        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+    ),
+    [SYS] = LAYOUT(
+    // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,  EE_CLR,     EE_CLR, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        RGB_M_X, RGB_M_SW, RGB_M_SN, XXXXXXX, RGB_M_T, RGB_M_R,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        RGB_M_K, RGB_VAD, RGB_RMOD, RGB_MOD, RGB_VAI, RGB_M_G,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        RGB_M_P, RGB_SAD, RGB_HUD, RGB_HUI, RGB_SAI, RGB_M_B,    DB_TOGG,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(SYS),
+    // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+            XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , XXXXXXX, XXXXXXX,
+            //                            ╰───────────────────────────╯ ╰──────────────────╯
+    MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
+        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+    ),
+    [GAME] = LAYOUT(
+    // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+        KC_GRAVE,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,      KC_6,    KC_7,    KC_8,    KC_9,    KC_0, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+         KC_MINS,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   XXXXXXX, XXXXXXX,   KC_UP, XXXXXXX, XXXXXXX, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+         KC_PLUS,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   XXXXXXX, KC_LEFT, KC_DOWN,KC_RIGHT, XXXXXXX, XXXXXXX,
+    // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+         KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+                            XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+            //                            ╰───────────────────────────╯ ╰──────────────────╯
+    MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
+        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+    ),
     // clang-format on
 };
 
@@ -139,6 +230,12 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     // clang-format off
     [DEF] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [NUM] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [FN]  = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [NAV] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [SYM] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [MOU] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [SYS] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+   [GAME] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
     // clang-format on
 };
 #endif // ENCODER_MAP_ENABLE
@@ -192,6 +289,7 @@ void adjust_cpi(bool increase) {
 
 // Function to handle key events and enable/disable drag scrolling
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_select_word(keycode, record)) { return false; }
     switch (keycode) {
         case DPI_UP:
             if (record->event.pressed) {

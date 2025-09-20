@@ -7,7 +7,8 @@ ENCODER_MAP_ENABLE = yes
 
 RAW_ENABLE = yes
 
-SRC += hid_display.c\
+SRC += 	select_word.c \
+		hid_display.c\
 		pic/_ui_logo_alpha_240x240.c \
 		pic/_ui_vol_alpha_240x240.c \
 		pic/_ui_alpha_240x240.c \
