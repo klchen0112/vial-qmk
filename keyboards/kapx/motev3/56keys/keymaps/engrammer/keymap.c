@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_LCTL, LT(NUM,KC_TAB),   LT(FN, KC_ESC), DF(GAME),     KC_MUTE, LT(SYM,KC_ENTER), KC_SPC, LT(MOU,KC_BSPC),
   //                            ╰────────────────────────────────────╯ ╰──────────────────────────────╯
                MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-                            MO(SYS), MO(NAV), RM_PREV,              RM_SPDU, KC_1, MO(SYS)
+                            MO(SYS), MO(NAV), RM_PREV,              RM_SPDU, QK_CAPS_WORD_TOGGLE, MO(SYS)
     ),
     [NUM] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
