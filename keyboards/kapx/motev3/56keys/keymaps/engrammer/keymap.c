@@ -11,33 +11,17 @@
 #include "user_song_list.h"
 #include "drivers/haptic/drv2605l.h"
 
-#include "sm_td.h"
 #include "select_word.h"
 
+#define L_C LGUI_T(KC_C)
+#define L_I LALT_T(KC_I)
+#define L_E LCTL_T(KC_E)
+#define L_A LSFT_T(KC_A)
 
-smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
-    switch (keycode) {
-        SMTD_MT(KC_C, KC_LEFT_GUI)
-        SMTD_MT(KC_I, KC_LEFT_ALT)
-        SMTD_MT(KC_E, KC_LEFT_CTRL)
-        SMTD_MT(KC_A, KC_LSFT)
-        SMTD_MT(KC_N, KC_RIGHT_GUI)
-        SMTD_MT(KC_S, KC_RIGHT_ALT)
-        SMTD_MT(KC_T, KC_RIGHT_CTRL)
-        SMTD_MT(KC_H, KC_RSFT)
-        SMTD_LT(KC_GRAVE, SYS)
-        SMTD_LT(KC_RSFT, SYS)
-        SMTD_LT(KC_TAB, NUM)
-        SMTD_LT(KC_LCTL,NAV)
-        SMTD_LT(KC_ESC, FN)
-        SMTD_LT(KC_SPC, SYM)
-        SMTD_LT(KC_BSPC, MOU)
-    }
-
-    return SMTD_RESOLUTION_UNHANDLED;
-}
-
-
+#define R_N RGUI_T(KC_N)
+#define R_S RALT_T(KC_S)
+#define R_T RCTL_T(KC_T)
+#define R_H RSFT_T(KC_H)
 
 // 阻击模式相关定义
 #define SNP_MIN_CPI 50
@@ -59,26 +43,27 @@ static bool     sniper_mode = false;
 static uint16_t scroll_cpi  = SCROLL_DEFAULT_CPI;
 static bool     scroll_mode = false;
 
-
 enum custom_keycodes {
     DPI_UP = QK_KB_0, // SAFE_RANGE,
     DPI_DOWN,
     //    DRAG_SCROLL,
-    SNP,    // 长按进入阻击模式
-    SNP_T,  // 切换阻击模式
-    SNP_UP, // 增加阻击模式DPI
-    SNP_DN, // 减少阻击模式DPI
-    DRG,    // 长按进入滚动模式
-    DRG_T,  // 切换滚动模式
-    DRG_UP, // 增加滚动模式DPI
-    DRG_DN,  // 减少滚动模式DPI
-    SELWORD, // select word
-    STICKY_LAYER_TOGGLE // STLT
+    SNP,                // 长按进入阻击模式
+    SNP_T,              // 切换阻击模式
+    SNP_UP,             // 增加阻击模式DPI
+    SNP_DN,             // 减少阻击模式DPI
+    DRG,                // 长按进入滚动模式
+    DRG_T,              // 切换滚动模式
+    DRG_UP,             // 增加滚动模式DPI
+    DRG_DN,             // 减少滚动模式DPI
+    SELWORD,            // select word
+    STICKY_LAYER_TOGGLE, // STLT
 };
 #define STLT STICKY_LAYER_TOGGLE
 uint16_t SELECT_WORD_KEYCODE = SELWORD;
 // 声明一个全局变量来存储当前的CPI值
 static uint16_t current_cpi = CPI_DEFAULT;
+
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* QWERTY
@@ -93,21 +78,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                         |_FUNC | _NUM | /_SYMBOL/        \ _FUNC \ | _NAV | RAlt |
      *                         `-------------''-------'          '-------''-------------'
      */
-    // clang-format
+    // clang-format off
   [DEF] = LAYOUT(
   // ╭───────────────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────────╮
-       KC_GRAVE,            KC_1,   KC_2,   KC_3,   KC_4,      KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,         KC_RSFT,
+       KC_GRAVE,            KC_1,   KC_2,   KC_3,   KC_4,      KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,          KC_RSFT,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
-        KC_LBRC,            KC_B,   KC_Y,   KC_O,   KC_U,   KC_QUOT,     KC_SCLN,   KC_L,   KC_D,   KC_W,   KC_V,          KC_RBRC,
+        KC_LBRC,             KC_B,   KC_Y,   KC_O,   KC_U,   KC_QUOT,     KC_SCLN,   KC_L,   KC_D,   KC_W,   KC_V,          KC_RBRC,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
-        KC_COMM,             KC_C,    KC_I,   KC_E,    KC_A,     KC_Z,        KC_Q,   KC_H,   KC_T,    KC_S,    KC_N,          KC_DOT,
+        KC_COMM,             L_C,    L_I,   L_E,    L_A,     KC_Z,              KC_Q,  R_H,   R_T,    R_S, R_N,          KC_DOT,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
         KC_SLSH,            KC_G,   KC_X,    KC_J,  KC_K,   KC_MINS,      KC_EQL,   KC_R,   KC_M,   KC_F,    KC_P,         KC_BSLS,
   // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────╯
-                                KC_TAB, KC_LCTL,   KC_ESC, DF(GAME),     KC_MUTE, KC_SPC, KC_ENTER, KC_BSPC,
+          LT(NAV,KC_LCTL), LT(NUM,KC_TAB),   LT(FN, KC_ESC), DF(GAME),     KC_MUTE, LT(SYM,KC_ENTER), KC_SPC, LT(MOU,KC_BSPC),
   //                            ╰────────────────────────────────────╯ ╰──────────────────────────────╯
                MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-                            KC_ESC, MO(NAV), RM_PREV,              RM_SPDU, KC_1, KC_DEL
+                            MO(SYS), MO(NAV), RM_PREV,              RM_SPDU, KC_1, MO(SYS)
     ),
     [NUM] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -281,11 +266,9 @@ void adjust_cpi(bool increase) {
 
 // Function to handle key events and enable/disable drag scrolling
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_smtd(keycode, record)) {
+    if (!process_select_word(keycode, record)) {
         return false;
     }
-    if (!process_select_word(keycode, record)) { return false; }
-
     switch (keycode) {
         case STLT:
             if (record->event.pressed) {
@@ -458,7 +441,7 @@ void keyboard_post_init_user() {
 
 // 鼠标自动切层
 void pointing_device_init_user(void) {
-    set_auto_mouse_layer(MOU);  // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+    set_auto_mouse_layer(MOU);   // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
     set_auto_mouse_enable(true); // always required before the auto mouse feature will work
 }
 

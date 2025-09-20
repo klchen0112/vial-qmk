@@ -17,7 +17,7 @@
 #include QMK_KEYBOARD_H
 #include "features/select_word.h"
 // #include "features/custom_shift_keys.h"
-#include "features/sm_td.h"
+
 
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -25,20 +25,7 @@
 #endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 
-smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap_count) {
-    switch (keycode) {
-        SMTD_MT(KC_C, KC_LEFT_GUI)
-        SMTD_MT(KC_I, KC_LEFT_ALT)
-        SMTD_MT(KC_E, KC_LEFT_CTRL)
-        SMTD_MT(KC_A, KC_LSFT)
-        SMTD_MT(KC_N, KC_RIGHT_GUI)
-        SMTD_MT(KC_S, KC_RIGHT_ALT)
-        SMTD_MT(KC_T, KC_RIGHT_CTRL)
-        SMTD_MT(KC_H, KC_RSFT)
-    }
 
-    return SMTD_RESOLUTION_UNHANDLED;
-}
 
 enum charybdis_keymap_layers {
     DEF = 0,
