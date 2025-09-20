@@ -7,7 +7,7 @@
 static bool display_enabled;
 
 /* public function to be used in keymaps */
-bool is_display_side(void) {
+int is_display_side(void) {
 #ifdef STRONT_DISPLAY_RIGHT
     return !is_keyboard_left();
 #endif
@@ -18,7 +18,7 @@ bool is_display_side(void) {
 }
 
 /* public function to be used in keymaps */
-bool is_display_enabled(void) {
+int is_display_enabled(void) {
     return display_enabled;
 }
 

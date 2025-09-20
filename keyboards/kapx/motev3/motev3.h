@@ -3,5 +3,5 @@
 
 #pragma once
 
-bool is_display_enabled(void);
-bool is_display_side(void);
+int is_display_enabled(void);
+int is_display_side(void);
