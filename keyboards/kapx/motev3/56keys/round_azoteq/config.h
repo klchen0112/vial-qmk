@@ -1,0 +1,26 @@
+// Copyright 2023 zzeneg (@zzeneg)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+// azoteq触控板配置选项
+#define POINTING_DEVICE_RIGHT
+#define AZOTEQ_IQS5XX_TPS43
+#define POINTING_DEVICE_ROTATION_90
+#define AZOTEQ_IQS5XX_TAP_ENABLE true
+#define AZOTEQ_IQS5XX_TWO_FINGER_TAP_ENABLE true
+#define AZOTEQ_IQS5XX_PRESS_AND_HOLD_ENABLE true
+#define AZOTEQ_IQS5XX_SWIPE_X_ENABLE true
+#define AZOTEQ_IQS5XX_SWIPE_Y_ENABLE true
+#define AZOTEQ_IQS5XX_ZOOM_ENABLE true
+#define AZOTEQ_IQS5XX_SCROLL_ENABLE true
+
+// 点设备的任务更新时间
+// #define POINTING_DEVICE_TASK_THROTTLE_MS 15
+
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+
+#define CPI_MIN 50
+#define CPI_MAX 16000
+#define CPI_STEP 100
+#define CPI_DEFAULT 1000

@@ -1,0 +1,16 @@
+// Copyright 2023 zzeneg (@zzeneg)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+#define CIRQUE_PINNACLE_ATTENUATION EXTREG__TRACK_ADCCONFIG__ADC_ATTENUATE_2X // enable for curved overlay
+
+// #define POINTING_DEVICE_INVERT_X
+// 设备除数，越小越快
+
+// 点设备的任务更新时间
+#define POINTING_DEVICE_TASK_THROTTLE_MS 15
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+#define POINTING_DEVICE_ROTATION_90
+#define CIRQUE_PINNACLE_SPI_DIVISOR 5
+#define CIRQUE_PINNACLE_SPI_CS_PIN POINTING_DEVICE_CS_PIN
