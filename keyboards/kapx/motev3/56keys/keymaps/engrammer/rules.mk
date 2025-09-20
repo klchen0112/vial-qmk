@@ -7,6 +7,8 @@ ENCODER_MAP_ENABLE = yes
 
 RAW_ENABLE = yes
 
+DEFERRED_EXEC_ENABLE = yes
+
 SRC += 	select_word.c \
 		hid_display.c\
 		pic/_ui_logo_alpha_240x240.c \

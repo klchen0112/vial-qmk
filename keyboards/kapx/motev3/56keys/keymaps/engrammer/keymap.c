@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                         |_FUNC | _NUM | /_SYMBOL/        \ _FUNC \ | _NAV | RAlt |
      *                         `-------------''-------'          '-------''-------------'
      */
-    // clang-format off
+    // clang-format
   [DEF] = LAYOUT(
   // ╭───────────────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────────╮
         LT(SYS, KC_GRAVE),  KC_1,   KC_2,   KC_3,   KC_4,      KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,  LT(SYS,KC_RSFT),
@@ -285,6 +285,9 @@ void adjust_cpi(bool increase) {
 // Function to handle key events and enable/disable drag scrolling
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_select_word(keycode, record)) { return false; }
+     if (!process_smtd(keycode, record)) {
+        return false;
+    }
     if (keycode == STLT && record->event.pressed) {
         default_layer_set(default_layer_state ? 0 : (1 << get_highest_layer(layer_state)));
     }
