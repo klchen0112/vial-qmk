@@ -19,7 +19,7 @@
 
 
 
-#define TAPPING_TERM 200
+#define TAPPING_TERM 300
 // #define FLOW_TAP_TERM 150
 
 
