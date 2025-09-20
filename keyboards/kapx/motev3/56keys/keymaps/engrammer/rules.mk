@@ -5,8 +5,7 @@ VIALRGB_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 RAW_ENABLE = yes
-
-DEFERRED_EXEC_ENABLE = yes
+NKRO_ENABLE = yes  # 开启 NKRO
 
 SRC += 	select_word.c \
 		hid_display.c\
