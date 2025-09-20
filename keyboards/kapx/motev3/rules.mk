@@ -2,7 +2,7 @@
 # choose pointing device driver:
 # POINTING_DEVICE_DRIVER = cirque_pinnacle_spi
 # POINTING_DEVICE_DRIVER = cirque_pinnacle_i2c
-POINTING_DEVICE_DRIVER = azoteq_iqs5xx
+# POINTING_DEVICE_DRIVER = azoteq_iqs5xx
 
 QUANTUM_PAINTER_LVGL_INTEGRATION = yes
 # choose one display driver:

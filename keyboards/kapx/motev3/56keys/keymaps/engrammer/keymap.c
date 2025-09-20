@@ -25,23 +25,20 @@ smtd_resolution on_smtd_action(uint16_t keycode, smtd_action action, uint8_t tap
         SMTD_MT(KC_S, KC_RIGHT_ALT)
         SMTD_MT(KC_T, KC_RIGHT_CTRL)
         SMTD_MT(KC_H, KC_RSFT)
+        SMTD_LT(KC_GRAVE, SYS)
+        SMTD_LT(KC_RSFT, SYS)
+        SMTD_LT(KC_TAB, NUM)
+        SMTD_LT(KC_LCTL,NAV)
+        SMTD_LT(KC_ESC, FN)
+        SMTD_LT(KC_SPC, SYM)
+        SMTD_LT(KC_BSPC, MOU)
     }
 
     return SMTD_RESOLUTION_UNHANDLED;
 }
 
-#define L_C LGUI_T(KC_C)
-#define L_I LALT_T(KC_I)
-#define L_E LCTL_T(KC_E)
-#define L_A LSFT_T(KC_A)
 
-#define R_N RGUI_T(KC_N)
-#define R_S RALT_T(KC_S)
-#define R_T RCTL_T(KC_T)
-#define R_H RSFT_T(KC_H)
 
-#define SYS_BSPC LT(SYS,KC_BSPC)
-#define SYS_ESC LT(SYS,KC_ESC)
 // 阻击模式相关定义
 #define SNP_MIN_CPI 50
 #define SNP_MAX_CPI 500
@@ -99,18 +96,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format
   [DEF] = LAYOUT(
   // ╭───────────────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────────╮
-        LT(SYS, KC_GRAVE),  KC_1,   KC_2,   KC_3,   KC_4,      KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,  LT(SYS,KC_RSFT),
+       KC_GRAVE,            KC_1,   KC_2,   KC_3,   KC_4,      KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,         KC_RSFT,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
         KC_LBRC,            KC_B,   KC_Y,   KC_O,   KC_U,   KC_QUOT,     KC_SCLN,   KC_L,   KC_D,   KC_W,   KC_V,          KC_RBRC,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
-        KC_COMM,             L_C,    L_I,    L_E,    L_A,      KC_Z,        KC_Q,   R_H,     R_T,    R_S,    R_N,           KC_DOT,
+        KC_COMM,             KC_C,    KC_I,   KC_E,    KC_A,     KC_Z,        KC_Q,   KC_H,   KC_T,    KC_S,    KC_N,          KC_DOT,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
         KC_SLSH,            KC_G,   KC_X,    KC_J,  KC_K,   KC_MINS,      KC_EQL,   KC_R,   KC_M,   KC_F,    KC_P,         KC_BSLS,
   // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────╯
-                   LT(NUM,KC_TAB), KC_LCTL,   LT(FN,KC_ESC), DF(GAME),     KC_MUTE, LT(SYM,KC_SPC), LT(FN,KC_ENTER),  LT(MOU,KC_BSPC),
+                                KC_TAB, KC_LCTL,   KC_ESC, DF(GAME),     KC_MUTE, KC_SPC, KC_ENTER, KC_BSPC,
   //                            ╰────────────────────────────────────╯ ╰──────────────────────────────╯
                MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-                            SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+                            KC_ESC, MO(NAV), RM_PREV,              RM_SPDU, KC_1, KC_DEL
     ),
     [NUM] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -125,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    KC_MUTE, KC_RPRN , KC_LPRN, KC_P0,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
       MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-                            SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+                            KC_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, KC_BSPC
     ),
     [FN] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -140,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , KC_BRID, KC_BRIU,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
       MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-                            SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+                            KC_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, KC_BSPC
     ),
     [NAV] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -155,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , XXXXXXX, XXXXXXX,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
       MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-                            SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+                            KC_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, KC_BSPC
     ),
     [SYM] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -170,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     KC_BSLS, KC_COLN,  KC_PERC,   KC_AMPR,     KC_PLUS, XXXXXXX,  KC_LBRC ,KC_RBRC,
   //                            ╰───────────────────────────╯ ╰──────────────────╯
     MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+        KC_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, KC_BSPC
     ),
      [MOU] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -185,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_BTN1, KC_BTN2,  KC_BTN3,   XXXXXXX,     XXXXXXX, XXXXXXX,  XXXXXXX ,XXXXXXX,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
     MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+        KC_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, KC_BSPC
     ),
     [SYS] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -200,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,    XXXXXXX, XXXXXXX , XXXXXXX, XXXXXXX,
             //                            ╰───────────────────────────╯ ╰──────────────────╯
     MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+        KC_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, KC_BSPC
     ),
     [GAME] = LAYOUT(
     // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
@@ -215,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             XXXXXXX, XXXXXXX, XXXXXXX,DF(DEF),   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
             //                            ╰───────────────────────────╯ ╰──────────────────╯
     MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
-        SYS_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, SYS_BSPC
+        KC_ESC, KC_1, RM_PREV,              RM_SPDU, KC_1, KC_BSPC
     ),
     // clang-format on
 };
@@ -284,14 +281,17 @@ void adjust_cpi(bool increase) {
 
 // Function to handle key events and enable/disable drag scrolling
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_select_word(keycode, record)) { return false; }
-     if (!process_smtd(keycode, record)) {
+    if (!process_smtd(keycode, record)) {
         return false;
     }
-    if (keycode == STLT && record->event.pressed) {
-        default_layer_set(default_layer_state ? 0 : (1 << get_highest_layer(layer_state)));
-    }
+    if (!process_select_word(keycode, record)) { return false; }
+
     switch (keycode) {
+        case STLT:
+            if (record->event.pressed) {
+                default_layer_set(default_layer_state ? 0 : (1 << get_highest_layer(layer_state)));
+            }
+            return false;
         case DPI_UP:
             if (record->event.pressed) {
                 adjust_cpi(true);
