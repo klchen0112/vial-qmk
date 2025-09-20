@@ -179,13 +179,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
      [MOU] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       XXXXXXX, DPI_RMOD, DPI_MOD, S_D_RMOD, S_D_MOD, XXXXXXX,    EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, KC_ACL2, KC_WH_L, KC_MS_U, KC_WH_R, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       DRGSCRL, KC_ACL0, KC_MS_L, KC_MS_D, KC_MS_R, SNIPING,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
+       XXXXXXX, KC_ACL0, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       DRG_TOG, KC_ACL1, KC_WH_D, XXXXXXX, KC_WH_U, SNP_TOG,    DB_TOGG,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(MOU),
+         DRG_T, KC_ACL1, KC_WH_D, XXXXXXX, KC_WH_U, SNP_T,        DB_TOGG,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TG(MOU),
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                             KC_BTN1, KC_BTN2,  KC_BTN3,   XXXXXXX,     XXXXXXX, XXXXXXX,  XXXXXXX ,XXXXXXX,
     //                            ╰───────────────────────────╯ ╰──────────────────╯
