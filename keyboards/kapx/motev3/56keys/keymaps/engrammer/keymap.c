@@ -63,7 +63,13 @@ uint16_t SELECT_WORD_KEYCODE = SELWORD;
 // 声明一个全局变量来存储当前的CPI值
 static uint16_t current_cpi = CPI_DEFAULT;
 
-
+// enum {
+//     MAGIC_SHIFT = 0,
+// };
+// // Add tap dance item to your keymap in place of a keycode
+// tap_dance_action_t tap_dance_actions[] = {
+//     [MAGIC_SHIFT] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, QK_CAPS_WORD_TOGGLE),
+// };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* QWERTY
@@ -89,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────┤
         KC_SLSH,            KC_G,   KC_X,    KC_J,  KC_K,   KC_MINS,      KC_EQL,   KC_R,   KC_M,   KC_F,    KC_P,         KC_BSLS,
   // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────╯
-           KC_LCTL, LT(NUM,KC_TAB),   LT(FN, KC_ESC), DF(GAME),     KC_MUTE, LT(SYM,KC_ENTER), KC_SPC, LT(MOU,KC_BSPC),
+           XXXXXXX, LT(NUM,KC_TAB),   LT(FN, KC_ESC), DF(GAME),     KC_MUTE, LT(SYM,KC_ENTER), KC_SPC, LT(MOU,KC_BSPC),
   //                            ╰────────────────────────────────────╯ ╰──────────────────────────────╯
                MO(2),   MO(3),   MO(1),    MO(4),   MO(5),      KC_ENT,  KC_RGHT,  KC_DOWN, KC_LEFT, KC_UP,
                             MO(SYS), MO(NAV), RM_PREV,              RM_SPDU, QK_CAPS_WORD_TOGGLE, MO(SYS)

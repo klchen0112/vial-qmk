@@ -6,6 +6,7 @@ CAPS_WORD_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 RAW_ENABLE = yes
 NKRO_ENABLE = yes  # 开启 NKRO
+TAP_DANCE_ENABLE = yes
 
 SRC += 	select_word.c \
 		hid_display.c\
