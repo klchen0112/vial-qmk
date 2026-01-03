@@ -59,6 +59,20 @@
 
 #endif // TAPPING_TERM
 
+#define TAPPING_TERM 200
+#define QUICK_TAP_TERM 150
+#define CAPS_WORD_IDLE_TIMEOUT 3000  // 3 seconds.
+
+#ifndef FLOW_TAP_TERM
+#define FLOW_TAP_TERM 150
+#endif
+
+#define SPECULATIVE_HOLD
+
+#ifndef CHORDAL_HOLD
+#define CHORDAL_HOLD
+#endif
+
 /* Miryoku */
 #define BILATERAL_COMBINATIONS
 #define BILATERAL_COMBINATIONS_LIMIT_CHORD_TO_N_KEYS 4 /* GUI, Alt, Ctrl, Shift */
