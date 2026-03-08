@@ -61,6 +61,8 @@
 
 #define TAPPING_TERM 200
 #define QUICK_TAP_TERM 150
+
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 #define CAPS_WORD_IDLE_TIMEOUT 3000  // 3 seconds.
 
 #ifndef FLOW_TAP_TERM
