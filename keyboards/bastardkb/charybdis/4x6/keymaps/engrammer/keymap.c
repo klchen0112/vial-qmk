@@ -18,15 +18,6 @@
 #include "features/select_word.h"
 // #include "features/custom_shift_keys.h"
 
-
-
-#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-#    include "timer.h"
-#endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-
-
-
-
 enum charybdis_keymap_layers {
     DEF = 0,
     NUM,
@@ -40,18 +31,6 @@ enum charybdis_keymap_layers {
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
 #define CHARYBDIS_AUTO_SNIPING_ON_LAYER MOU
-
-#ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-static uint16_t auto_pointer_layer_timer = 0;
-
-#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
-#    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
-
-#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 8
-#    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#endif     // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 #define L_C LGUI_T(KC_C)
 #define L_I LALT_T(KC_I)
@@ -245,31 +224,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 // clang-format on
 
 #ifdef POINTING_DEVICE_ENABLE
-#    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
-        if (auto_pointer_layer_timer == 0) {
-            layer_on(CHARYBDIS_AUTO_SNIPING_ON_LAYER);
-#        ifdef RGB_MATRIX_ENABLE
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-#        endif // RGB_MATRIX_ENABLE
-        }
-        auto_pointer_layer_timer = timer_read();
-    }
-    return mouse_report;
+/** \brief Auto mouse: switch to the MOU layer while the trackball is in use. */
+void pointing_device_init_user(void) {
+    set_auto_mouse_layer(MOU);   // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+    set_auto_mouse_enable(true); // always required before the auto mouse feature will work
 }
-
-void matrix_scan_user(void) {
-    if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
-        auto_pointer_layer_timer = 0;
-        layer_off(CHARYBDIS_AUTO_SNIPING_ON_LAYER);
-#        ifdef RGB_MATRIX_ENABLE
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_EFFECT_MAX);
-#        endif // RGB_MATRIX_ENABLE
-    }
-}
-#    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_user(layer_state_t state) {

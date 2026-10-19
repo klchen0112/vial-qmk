@@ -106,10 +106,20 @@
 // // - `CHARYBDIS_POINTER_ACCELERATION_FACTOR`
 #define CHARYBDIS_POINTER_ACCELERATION_ENABLE
 
-// // Automatically enable the pointer layer when moving the trackball.  See also:
-// // - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
-// // - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
-#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+// Automatically enable the mouse layer while the trackball is moving.
+// Ported from `keyboards/kapx/motev3/56keys` (QMK's built-in auto mouse
+// feature). The target layer is set at runtime in `pointing_device_init_user()`
+// with `set_auto_mouse_layer(MOU)`.
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+// Layer stays on this long after the last trackball movement (default: 650ms).
+#define AUTO_MOUSE_TIME 1000
+// Accumulated movement required to trigger the layer (default: 10).
+// #define AUTO_MOUSE_THRESHOLD 10
+// Movement right after a normal key press is ignored for this long (default:
+// tapping term); any non-mouse key press also drops the layer.
+// #define AUTO_MOUSE_DELAY 150
+// Cooldown after the layer is switched off (default: 25ms).
+// #define AUTO_MOUSE_DEBOUNCE 25
 // #undef ROTATIONAL_TRANSFORM_ANGLE
 // #define ROTATIONAL_TRANSFORM_ANGLE 0
 
